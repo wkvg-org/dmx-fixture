@@ -15,10 +15,9 @@ club-ctrl (DMX TX transmitter) → Moving Head #1 → Moving Head #2 → dmx-fix
 
 ## What it is
 
-A pure DMX512 receiver: it has **no network stack, no Wi-Fi and no MQTT**. It
-listens on the RS485 bus, decodes incoming frames and switches relays based on
-slot values. Each DMX slot maps to one relay; a value `≥ 128` switches the
-relay ON, `< 128` switches it OFF.
+A pure DMX512 receiver. It listens on the RS485 bus, decodes incoming frames
+and switches relays based on slot values. Each DMX slot maps to one relay; a
+value `≥ 128` switches the relay ON, `< 128` switches it OFF.
 
 ## Hardware
 
