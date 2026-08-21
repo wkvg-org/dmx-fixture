@@ -10,7 +10,7 @@ venue/home-automation system. In the installed daisy chain the fixture is a
 downstream receiver:
 
 ```
-club-ctrl (DMX TX master) → Moving Head #1 → Moving Head #2 → dmx-fixture
+club-ctrl (DMX TX transmitter) → Moving Head #1 → Moving Head #2 → dmx-fixture
 ```
 
 ## What it is
