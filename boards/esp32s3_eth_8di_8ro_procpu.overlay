@@ -1,0 +1,42 @@
+/*
+ * Copyright (c) 2026
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Board overlay for DMX fixture — ESP32-S3 Waveshare POE ETH 8DI 8RO.
+ *
+ * UART1 RX (GPIO18) receives the DMX512 stream from the RS485 bus.
+ * TX (GPIO17) is kept idle-high so the auto-DE transceiver stays in
+ * receive mode.  The PCA9538 GPIO expander drives 8 relay outputs.
+ */
+
+#include <dt-bindings/pinctrl/esp32s3-pinctrl.h>
+#include <zephyr/dt-bindings/pinctrl/esp-pinctrl-common.h>
+#include <zephyr/dt-bindings/pinctrl/esp32s3-gpio-sigmap.h>
+#include <zephyr/dt-bindings/pwm/pwm.h>
+
+&pinctrl {
+	uart1_dmx_rx: uart1_dmx_rx {
+		group1 {
+			pinmux = <UART1_TX_GPIO17>;
+			output-high;  /* keep transceiver in RX mode */
+		};
+		group2 {
+			pinmux = <UART1_RX_GPIO18>;
+			bias-pull-up;
+		};
+	};
+};
+
+/ {
+	aliases {
+		dmx-uart = &uart1;
+	};
+};
+
+&uart1 {
+	status = "okay";
+	compatible = "espressif,esp32-uart";
+	pinctrl-0 = <&uart1_dmx_rx>;
+	pinctrl-names = "default";
+	current-speed = <250000>;
+};

@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# dmx-fixture — DMX512 relay actuator
+
+cmake_minimum_required(VERSION 3.20.0)
+
+SET(CMAKE_C_USE_RESPONSE_FILE_FOR_OBJECTS 1)
+SET(CMAKE_CXX_USE_RESPONSE_FILE_FOR_OBJECTS 1)
+SET(CMAKE_C_RESPONSE_FILE_LINK_FLAG "@")
+SET(CMAKE_CXX_RESPONSE_FILE_LINK_FLAG "@")
+SET(CMAKE_NINJA_FORCE_RESPONSE_FILE 1 CACHE INTERNAL "")
+
+find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
+project(dmx_fixture)
+
+target_sources(app PRIVATE src/main.c)
+
+add_subdirectory(../dmx-z ${CMAKE_BINARY_DIR}/dmx-z)
+add_subdirectory(src/modules/relay)
